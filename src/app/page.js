@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Weather App</h1>
+      <h1 style={styles.title}>ClimaX</h1>
       <form onSubmit={handleSearch} style={styles.form}>
         <input
           type="text"
