@@ -15,7 +15,7 @@ const Home = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://api.weatherapi.com/v1/current.json?key=47e8d70bc6f64998aea60630250802&q=${city}&aqi=yes`
+        `https://api.weatherapi.com/v1/current.json?key=47e8d70bc6f64998aea60630250802&q=${city}&aqi=yes`
       );
       setWeatherData(response.data);
     } catch (err) {
