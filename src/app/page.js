@@ -1,5 +1,4 @@
-// app/page.js
-"use client"; // Required for using React hooks (useState, useEffect, etc.)
+"use client";
 
 import React, { useState } from "react";
 import axios from "axios";

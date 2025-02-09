@@ -1,12 +1,20 @@
-// src/components/WeatherCard.js
+// components/WeatherCard.js
 import React from "react";
 
 const WeatherCard = ({ weatherData }) => {
   if (!weatherData) return null;
 
+  // Convert localtime to a Date object
+  const localTime = new Date(weatherData.location.localtime);
+  const dayOfWeek = localTime.toLocaleDateString("en-US", { weekday: "long" }); // Get day of the week
+  const time = localTime.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }); // Get time
+
   return (
     <div style={styles.card}>
       <h2 style={styles.city}>{weatherData.location.name}</h2>
+      <p style={styles.dayTime}>
+        {dayOfWeek}, {time}
+      </p>
       <p style={styles.temp}>{weatherData.current.temp_c}°C</p>
       <p style={styles.condition}>{weatherData.current.condition.text}</p>
       <img src={weatherData.current.condition.icon} alt="Weather Icon" style={styles.icon} />
@@ -30,6 +38,11 @@ const styles = {
   city: {
     fontSize: "24px",
     margin: "0 0 10px",
+  },
+  dayTime: {
+    fontSize: "18px",
+    margin: "0 0 10px",
+    color: "#0d74e7",
   },
   temp: {
     fontSize: "48px",
