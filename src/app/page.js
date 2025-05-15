@@ -1,8 +1,9 @@
-"use client";
 
+"use client" ;
 import React, { useState } from "react";
 import axios from "axios";
 import WeatherCard from "./WeatherCard";
+import "./style.css"; // We'll create this CSS file
 
 const Home = () => {
   const [city, setCity] = useState("London");
@@ -27,71 +28,30 @@ const Home = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchWeather();
+    if (city.trim()) fetchWeather();
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>ClimaX</h1>
-      <form onSubmit={handleSearch} style={styles.form}>
+    <div className="app-container">
+      <h1 className="app-title">ClimaX</h1>
+      <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter city name"
-          style={styles.input}
+          className="search-input"
+          required
         />
-        <button type="submit" style={styles.button}>
-          Search
+        <button type="submit" className="search-button" disabled={loading}>
+          {loading ? "Searching..." : "Search"}
         </button>
       </form>
-      {loading && <p style={styles.loading}>Loading...</p>}
-      {error && <p style={styles.error}>{error}</p>}
+      {loading && <p className="loading-message">Loading weather data...</p>}
+      {error && <p className="error-message">{error}</p>}
       {weatherData && <WeatherCard weatherData={weatherData} />}
     </div>
   );
-};
-
-const styles = {
-  container: {
-    backgroundColor: "#24292d",
-    minHeight: "100vh",
-    padding: "20px",
-    color: "#ffffff",
-    textAlign: "center",
-  },
-  title: {
-    fontSize: "32px",
-    marginBottom: "20px",
-  },
-  form: {
-    marginBottom: "20px",
-  },
-  input: {
-    padding: "10px",
-    fontSize: "16px",
-    borderRadius: "5px",
-    border: "1px solid #0d74e7",
-    marginRight: "10px",
-    backgroundColor: "#2b3137",
-    color: "#ffffff",
-  },
-  button: {
-    padding: "10px 20px",
-    fontSize: "16px",
-    borderRadius: "5px",
-    border: "none",
-    backgroundColor: "#0d74e7",
-    color: "#ffffff",
-    cursor: "pointer",
-  },
-  loading: {
-    fontSize: "18px",
-  },
-  error: {
-    fontSize: "18px",
-    color: "#ff6b6b",
-  },
 };
 
 export default Home;

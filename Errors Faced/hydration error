@@ -1,0 +1,35 @@
+# Hydration Mismatch Error in Next.js
+
+## Error Description
+
+
+This error occurs when there's a mismatch between server-rendered HTML and client-side React hydration.
+
+## Common Causes
+
+### 1. Server/Client State Differences
+- Using `if (typeof window !== 'undefined')` conditions
+- Variable inputs like `Date.now()` or `Math.random()`
+- Locale-specific formatting (dates, numbers) that differs between server and client
+
+### 2. Dynamic Content Issues
+- External data changes between server render and client hydration
+- Browser extensions modifying DOM before React hydration
+- Invalid HTML tag nesting
+
+### 3. Style Mismatches
+- Dynamic styles/classes applied differently on server and client
+- CSS-in-JS libraries generating different class names
+
+## Solutions
+
+### 🛠️ General Fixes
+
+```javascript
+// 1. Mark client-only components explicitly
+"use client";
+
+// 2. Move dynamic operations to useEffect
+useEffect(() => {
+  // Client-side only code
+}, []);
